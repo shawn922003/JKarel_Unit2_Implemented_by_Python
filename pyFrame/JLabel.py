@@ -1,13 +1,13 @@
 import tkinter as tk
 from PIL import Image,ImageTk
 from pyFrame.Graphic import Graphics
-
+import time
 
 class JLabel:
     def __init__(self) -> None:
         self.__canvas=None
         self.__pilImg=None
-        self.__tkImg=[]
+        self.__tkImg=None
 
     def paintComponent(self,g:Graphics):
         raise NotImplementedError("paintComponent method must be overridden in a subclass")
@@ -18,12 +18,10 @@ class JLabel:
     def setPilImg(self,pilImg):
         self.__pilImg=pilImg
 
-    def setXY(self,x,y):
-        self.x=x
-        self.y=y
 
     def repaint(self):
-        assert self.__pilImg != [], "method \"repaint()\" needs to use ImageBuffer."
-        tk_img=ImageTk.PhotoImage(self.__pilImg[-1])
-        self.__tkImg.append(tk_img) # 放進list裡，是避免離開此函數時導致tk_img被釋放掉，導致顯示不出來圖片
-        self.__canvas.create_image(self.x, self.y, image=tk_img,anchor='nw')
+        while self.__pilImg is None:
+            time.sleep(0.01)
+        tk_img=ImageTk.PhotoImage(self.__pilImg)
+        self.__tkImg=tk_img 
+        self.__canvas.create_image(0, 0, image=self.__tkImg,anchor='nw')

@@ -61,10 +61,11 @@ class JFrame:
             self.window.protocol("WM_DELETE_WINDOW", lambda: self.__on_close(3))
 
     def setContentPane(self,contentPane:JLabel)->None:
-        self.ContentPane=contentPane
-        self.ContentPane.paintComponent(self.graphics)
-        self.ContentPane.setPilImg(self.graphics._getPilImg())
-        self.ContentPane.setXY(self.width,self.height)
+        self.contentPane=contentPane
+        self.contentPane.paintComponent(self.graphics)
+        self.contentPane.setCanvas(self.canvas)
+        self.contentPane.setPilImg(self.graphics._getPilImg())
+        
 
     def setVisible(self,b:bool)->None:
         self.visible=b

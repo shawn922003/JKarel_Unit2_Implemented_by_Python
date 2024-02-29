@@ -7,8 +7,8 @@ class Graphics:
         self.color='#FFFFFF'
         self.width=8
         self.font=['Arial',None,20]
-        self._pilImg=[]
-        self._tkImg=[]
+        self._pilImg=None
+        self._tkImgs=[]
         self.x=0
         self.y=0
 
@@ -60,10 +60,12 @@ class Graphics:
         '''
         self.x=x
         self.y=y
-        self._pilImg.append(img)
-        tk_img=ImageTk.PhotoImage(img)
-        self._tkImg.append(tk_img) # 放進list裡，是避免離開此函數時導致tk_img被釋放掉，導致顯示不出來圖片
-        self.canvas.create_image(x, y, image=tk_img,anchor='nw')
+        self._pilImg=img
+        tkImg=ImageTk.PhotoImage(self._pilImg)
+        self._tkImgs.append(tkImg) # 放進list裡，是避免離開此函數時導致tk_img被釋放掉，導致顯示不出來圖片
+        self.canvas.create_image(x, y, image=self._tkImgs[-1],anchor='nw')
+        
+        
 
     def drawLine(self,x1:int,y1:int,x2:int,y2:int):
         self.canvas.create_line(x1, y1, x2, y2,width=self.width,fill=self.color)

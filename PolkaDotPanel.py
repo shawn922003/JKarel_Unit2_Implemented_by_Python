@@ -4,7 +4,7 @@ from pyFrame.JLabel import JLabel
 from pyFrame.Graphic import Graphics
 from pyFrame.JFrame import *
 from pyFrame.Color import Color
-from pyFrame.BufferImage import BufferImage
+from pyFrame.BufferedImage import BufferedImage
 
 
 class PolkaDotPanel(JLabel):
@@ -19,26 +19,27 @@ class PolkaDotPanel(JLabel):
         self.ball2.setColor(Color.GREEN)
         self.ball2.setRadius(20)
 
-        self.graphic=None
+        self.imageBuffer=BufferedImage(self.FRAME,self.FRAME)
+
+        self.imageBuffer.setColor(self.BACKGROUND)
+        self.imageBuffer.fillRect(0,0,self.FRAME,self.FRAME)
 
         self.t=Timer(500,self.listener)
-        
-        
-
-    def paintComponent(self,g: Graphics):
-        self.graphic=g  
-        g.setColor(self.BACKGROUND)
-        g.fillRect(0,0,self.FRAME,self.FRAME)
         self.t.start()
+        
+    def paintComponent(self,g: Graphics):
+        g.drawImage(self.imageBuffer,0,0)
+
         
 
     def listener(self):
-        self.graphic.setColor(self.BACKGROUND)
-        self.graphic.fillRect(0,0,self.FRAME,self.FRAME)
+        self.imageBuffer.setColor(self.BACKGROUND)
+        self.imageBuffer.fillRect(0,0,self.FRAME,self.FRAME)
         self.ball1.jump(self.FRAME,self.FRAME)
-        self.ball1.draw(self.graphic)
+        self.ball1.draw(self.imageBuffer)
         self.ball2.jump(self.FRAME,self.FRAME)
-        self.ball2.draw(self.graphic)
+        self.ball2.draw(self.imageBuffer)
+        self.repaint()
 
 
 
