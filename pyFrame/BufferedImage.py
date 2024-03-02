@@ -5,11 +5,11 @@ class BufferedImage:
     def __init__(self,width,height):
         self.width=width
         self.height=height
-        self.img=Image.new('RGB',(width,height),'yellow')
-        self.drawObj=ImageDraw.Draw(self.img)
+        self.__img=Image.new('RGB',(width,height),'yellow')
+        self.__drawObj=ImageDraw.Draw(self.__img)
     
     def __getattr__(self,name):    
-        return getattr(self.img,name)
+        return getattr(self.__img,name)
     
 
     def setStroke(self,width:int):
@@ -22,13 +22,13 @@ class BufferedImage:
         pass
 
     def fillRect(self,x:int,y:int,width:int,height:int)->None:
-        self.drawObj.rectangle(((x,y),(x+width,y+height)),fill=self.color)
+        self.__drawObj.rectangle(((x,y),(x+width,y+height)),fill=self.color)
 
     def drawOval(self,x:int,y:int,width:int,height:int)->None:
         pass
 
     def fillOval(self,x:int,y:int,width:int,height:int)->None:
-        self.drawObj.ellipse((x,y,x+width,y+height),fill=self.color)
+        self.__drawObj.ellipse((x,y,x+width,y+height),fill=self.color)
 
     def setFont(self,name:str,style:tuple,size:int)->None:
         '''

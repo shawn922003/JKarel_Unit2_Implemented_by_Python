@@ -8,37 +8,37 @@ from pyFrame.BufferedImage import BufferedImage
 
 
 class PolkaDotPanel(JLabel):
-    FRAME=400
-    BACKGROUND=(204,204,204)
+    __FRAME=400
+    __BACKGROUND=(204,204,204)
 
 
     def __init__(self) -> None:
         super().__init__()
-        self.ball1=Polkadot()
-        self.ball2=Polkadot()
-        self.ball2.setColor(Color.GREEN)
-        self.ball2.setRadius(20)
+        self.__ball1=Polkadot()
+        self.__ball2=Polkadot()
+        self.__ball2.setColor(Color.GREEN)
+        self.__ball2.setRadius(20)
 
-        self.imageBuffer=BufferedImage(self.FRAME,self.FRAME)
+        self.__imageBuffer=BufferedImage(self.__FRAME,self.__FRAME)
 
-        self.imageBuffer.setColor(self.BACKGROUND)
-        self.imageBuffer.fillRect(0,0,self.FRAME,self.FRAME)
+        self.__imageBuffer.setColor(self.__BACKGROUND)
+        self.__imageBuffer.fillRect(0,0,self.__FRAME,self.__FRAME)
 
-        self.t=Timer(500,self.listener)
-        self.t.start()
+        self.__t=Timer(500,self.__listener)
+        self.__t.start()
         
     def paintComponent(self,g: Graphics):
-        g.drawImage(self.imageBuffer,0,0)
+        g.drawImage(self.__imageBuffer,0,0)
 
         
 
-    def listener(self):
-        self.imageBuffer.setColor(self.BACKGROUND)
-        self.imageBuffer.fillRect(0,0,self.FRAME,self.FRAME)
-        self.ball1.jump(self.FRAME,self.FRAME)
-        self.ball1.draw(self.imageBuffer)
-        self.ball2.jump(self.FRAME,self.FRAME)
-        self.ball2.draw(self.imageBuffer)
+    def __listener(self):
+        self.__imageBuffer.setColor(self.__BACKGROUND)
+        self.__imageBuffer.fillRect(0,0,self.__FRAME,self.__FRAME)
+        self.__ball1.jump(self.__FRAME,self.__FRAME)
+        self.__ball1.draw(self.__imageBuffer)
+        self.__ball2.jump(self.__FRAME,self.__FRAME)
+        self.__ball2.draw(self.__imageBuffer)
         self.repaint()
 
 

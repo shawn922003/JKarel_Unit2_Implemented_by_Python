@@ -3,7 +3,7 @@ from PIL import Image, ImageTk
 
 class Graphics:
     def __init__(self,canvas) -> None:
-        self.canvas=canvas
+        self.__canvas=canvas
         self.color='#FFFFFF'
         self.width=8
         self.font=['Arial',None,20]
@@ -13,7 +13,7 @@ class Graphics:
         self.y=0
 
     def _setCanvas(self,canvas):
-        self.canvas=canvas
+        self.__canvas=canvas
         
     def _getPilImg(self):
         return self._pilImg
@@ -25,16 +25,16 @@ class Graphics:
         self.color=Color.Color(color)
     
     def drawRect(self,x:int,y:int,width:int,height:int)->None:
-        self.canvas.create_rectangle(x,y,x+width,y+height, width=self.width, fill='',outline=self.color)
+        self.__canvas.create_rectangle(x,y,x+width,y+height, width=self.width, fill='',outline=self.color)
 
     def fillRect(self,x:int,y:int,width:int,height:int)->None:
-        self.canvas.create_rectangle(x,y,x+width,y+height, width=0, fill=self.color)
+        self.__canvas.create_rectangle(x,y,x+width,y+height, width=0, fill=self.color)
 
     def drawOval(self,x:int,y:int,width:int,height:int)->None:
-        self.canvas.create_oval(x, y, x+width, y+height, width=self.width, fill='', outline=self.color)
+        self.__canvas.create_oval(x, y, x+width, y+height, width=self.width, fill='', outline=self.color)
 
     def fillOval(self,x:int,y:int,width:int,height:int)->None:
-        self.canvas.create_oval(x, y, x+width, y+height, width=0, fill=self.color)
+        self.__canvas.create_oval(x, y, x+width, y+height, width=0, fill=self.color)
 
     def setFont(self,name:str,style:tuple,size:int)->None:
         '''
@@ -45,7 +45,7 @@ class Graphics:
         self.font=[name,size,style]
 
     def drawString(self,string:str,x:int,y:int):
-        self.canvas.create_text(x,y,text=string,fill=self.color,font=self.font,anchor='sw')
+        self.__canvas.create_text(x,y,text=string,fill=self.color,font=self.font,anchor='sw')
 
     def drawImage(self,img:Image,x:int,y:int):
         '''
@@ -63,12 +63,12 @@ class Graphics:
         self._pilImg=img
         tkImg=ImageTk.PhotoImage(self._pilImg)
         self._tkImgs.append(tkImg) # 放進list裡，是避免離開此函數時導致tk_img被釋放掉，導致顯示不出來圖片
-        self.canvas.create_image(x, y, image=self._tkImgs[-1],anchor='nw')
-        
+        self.__canvas.create_image(x, y, image=self._tkImgs[-1],anchor='nw')
         
 
+
     def drawLine(self,x1:int,y1:int,x2:int,y2:int):
-        self.canvas.create_line(x1, y1, x2, y2,width=self.width,fill=self.color)
+        self.__canvas.create_line(x1, y1, x2, y2,width=self.width,fill=self.color)
 
     def drawPolygon(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -84,7 +84,7 @@ class Graphics:
             arr.append(x)
             arr.append(y)
 
-        self.canvas.create_polygon(arr , width=self.width, fill='', outline=self.color)
+        self.__canvas.create_polygon(arr , width=self.width, fill='', outline=self.color)
 
     def drawPolyLine(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -96,6 +96,6 @@ class Graphics:
         assert len(xPoints) != yPoints, "xPoints長度需等於yPoints長度"
             
         for i in range(len(xPoints)-1):
-            self.canvas.create_line(xPoints[i], yPoints[i], xPoints[i+1], yPoints[i+1],width=self.width,fill=self.color)
+            self.__canvas.create_line(xPoints[i], yPoints[i], xPoints[i+1], yPoints[i+1],width=self.width,fill=self.color)
 
     

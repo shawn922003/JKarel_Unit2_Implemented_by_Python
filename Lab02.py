@@ -7,7 +7,7 @@ from PIL import Image
 class Panel02(JLabel):
     def __init__(self) -> None:
         super().__init__()
-        self.img=Image.open("tj.jpg")
+        self.__img=Image.open("tj.jpg")
 
     def paintComponent(self,g:Graphics):
         g.setColor(Color.RED)
@@ -18,7 +18,7 @@ class Panel02(JLabel):
             for j in range(34,40+169+21,20):
                 g.fillOval(i-10,j-10,25,25)
 
-        g.drawImage(self.img, 136, 43)
+        g.drawImage(self.__img, 136, 43)
 
         g.setColor(Color.WHITE)
         g.setFont("Arial",'bold',20)

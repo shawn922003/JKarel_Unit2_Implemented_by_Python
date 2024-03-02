@@ -6,62 +6,62 @@ import random
 class Polkadot:
     def __init__(self,**args):
         if 'x' in args.keys():
-            self.myX=args['x']
+            self.__myX=args['x']
         else:
-            self.myX=200
+            self.__myX=200
 
         if 'y' in args.keys():
-            self.myY=args['y']
+            self.__myY=args['y']
         else:
-            self.myY=200
+            self.__myY=200
 
         if 'd' in args.keys():
-            self.myDiameter=args['d']
+            self.__myDiameter=args['d']
         else:
-            self.myDiameter=25
+            self.__myDiameter=25
 
         if 'c' in args.keys():
-            self.myY=args['c']
+            self.__myColor=args['c']
         else:
-            self.myColor=Color.RED
+            self.__myColor=Color.RED
 
-        self.myRadius=self.myDiameter/2
+        self.__myRadius=self.__myDiameter/2
 
     def getX(self):
-        return self.myX
+        return self.__myX
 
     def getY(self):
-        return self.myY
+        return self.__myY
     
     def getDiameter(self):
-        return self.myDiameter
+        return self.__myDiameter
     
     def getRadius(self):
-        return self.myRadius
+        return self.__myRadius
     
     def setX(self,x:float):
-        self.myX=x
+        self.__myX=x
 
     def setY(self,y:float):
-        self.myY=y
+        self.__myY=y
 
     def setColor(self,c:tuple):
-        self.myColor=c
+        self.__myColor=c
 
     def setDiameter(self,d:float):
-        self.myDiameter=d
-        self.myRadius=d/2
+        self.__myDiameter=d
+        self.__myRadius=d/2
 
     def setRadius(self,r:float):
-        self.myDiameter=r*2
-        self.myRadius=r
+        self.__myDiameter=r*2
+        self.__myRadius=r
 
     def jump(self,rightEdge:int,buttonEdge:int):
-        self.myX=random.random()*(rightEdge-self.myDiameter)+self.myRadius
-        self.myY=random.random()*(buttonEdge-self.myDiameter)+self.myRadius
+        self.__myX=random.random()*(rightEdge-self.__myDiameter)+self.__myRadius
+        self.__myY=random.random()*(buttonEdge-self.__myDiameter)+self.__myRadius
 
     def draw(self,g:Graphics):
-        g.setColor(self.myColor)
+        g.setColor(self.__myColor)
         g.fillOval(self.getX()-self.getRadius(), self.getY()-self.getRadius(), self.getDiameter(), self.getDiameter())
 
     
