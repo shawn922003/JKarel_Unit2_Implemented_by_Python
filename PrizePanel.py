@@ -1,9 +1,12 @@
 from pyFrame.Color import Color
 from pyFrame.event.MouseAdapter import MouseAdapter
+from pyFrame.event.KeyAdapter import KeyAdapter
 from pyFrame.Graphic import Graphics
 from pyFrame.JLabel import JLabel
 from pyFrame.BufferedImage import BufferedImage
 from pyFrame.Timer import Timer
+from pyFrame.event.MouseEvent import MouseEvent
+from pyFrame.event.KeyEvent import KeyEvent
 from Ball import Ball
 from Polkadot import Polkadot
 import math
@@ -24,6 +27,7 @@ class PrizePanel(JLabel):
         self.__myImage.fillRect(0,0,self.__FRAME,self.__FRAME)
 
         self.addMouseListener(self.Mouse(self)) # self代表PrizePanel本身，由於Mouse類需要使用到PrizePanel的屬性，因此需要傳入self
+        self.addKeyListener(self.Key(self))
 
         self.__t=Timer(10,self.listener)
         self.__t.start()
@@ -55,18 +59,39 @@ class PrizePanel(JLabel):
         def __init__(self,outClass):
             self.outClass=outClass
 
-        def mousePressed(self, e):
-            if e.state & 0x0001 and e.num==1: # 0x0001表示shift的遮掩碼，num==1表示左鍵按下，num==2表示中鍵按下，num==3表示右鍵按下
+        def mousePressed(self, event:MouseEvent):
+            if event.isShiftDown(): 
                 self.outClass.ball.setdx(random.random()*20-10)
                 self.outClass.ball.setdy(random.random()*20-10)
 
-            elif e.num==1:
-                self.outClass.pd.setX(e.x) # 假如pd是私有，那此指令需改成 self.outClass._PrizePanel__pd.setX(e.x) ，其他的pd需要用如此方式做修正
-                self.outClass.pd.setY(e.y)
+            elif event.getBotton()==MouseEvent.BUTTON1:
+                self.outClass.pd.setX(event.getX()) # 假如pd是私有，那此指令需改成 self.outClass._PrizePanel__pd.setX(e.x) ，其他的pd需要用如此方式做修正
+                self.outClass.pd.setY(event.getY())
 
-            elif e.num==3:
-                self.outClass.ball.setX(e.x)
-                self.outClass.ball.setY(e.y)
+            elif event.getBotton()==MouseEvent.BUTTON3:
+                self.outClass.ball.setX(event.getX())
+                self.outClass.ball.setY(event.getY())
+
+    class Key(KeyAdapter):
+        def __init__(self,outClass) -> None:
+            self.outClass=outClass
+
+        def keyPressed(self, event:KeyEvent):
+            if event.getKeyCode() == KeyEvent.VK_UP and self.outClass.ball.getY() >= self.outClass.ball.getRadius()+10:
+                self.outClass.ball.setY(self.outClass.ball.getY()-10)
+
+            if event.getKeyCode() == KeyEvent.VK_DOWN and self.outClass.ball.getY() <= self.outClass._PrizePanel__FRAME-self.outClass.ball.getRadius()-10:
+                self.outClass.ball.setY(self.outClass.ball.getY()+10)
+
+            if event.getKeyCode() == KeyEvent.VK_LEFT and self.outClass.ball.getX() >= self.outClass.ball.getRadius()-10:
+                self.outClass.ball.setX(self.outClass.ball.getX()-10)
+
+            if event.getKeyCode() == KeyEvent.VK_RIGHT and self.outClass.ball.getX() <= self.outClass._PrizePanel__FRAME-self.outClass.ball.getRadius()+10:
+                self.outClass.ball.setX(self.outClass.ball.getX()+10)
+
+            
+                
+            
                 
 
 
