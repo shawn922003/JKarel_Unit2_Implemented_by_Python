@@ -60,12 +60,8 @@ class JLabel:
 
         if hasattr(self.__mouse,'mouseDragged'):
             self.__canvas.bind('<Motion>',self.__mouseTransform.mouseDragged, add='+' )
-            self.__canvas.bind('<Motion>',self.__mouseTransform.mouseDragged, add='+' )
-            self.__canvas.bind('<Motion>',self.__mouseTransform.mouseDragged, add='+' )
 
         if hasattr(self.__mouse,'mouseMoved'):
-            self.__canvas.bind('<Motion>',self.__mouseTransform.mouseMoved, add='+' )
-            self.__canvas.bind('<Motion>',self.__mouseTransform.mouseMoved, add='+' )
             self.__canvas.bind('<Motion>',self.__mouseTransform.mouseMoved, add='+' )
 
 
