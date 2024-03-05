@@ -1,0 +1,32 @@
+from fcps.Bucket import Bucket
+from pyFrame.JFrame import JFrame
+from BucketPanel import BucketPanel
+from threading import Thread
+
+def bucketAlg():
+    Bucket.setSpeed(5)
+    Bucket.useTotal(False)
+
+    five=Bucket(5)
+    three=Bucket(3)
+
+    five.fill()
+    five.pourInto(three)
+    three.spill()
+    five.pourInto(three)
+    five.fill()
+    five.pourInto(three)
+
+if __name__=="__main__":
+
+
+    frame=JFrame(title="Build a House")
+    frame.setSize(600,600)
+    frame.setLocation(100,100)
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+    frame.setContentPane(BucketPanel())
+    frame.setVisible(True)
+
+    Thread(target=bucketAlg,daemon=True).start()
+
+    frame.fixSetting()
