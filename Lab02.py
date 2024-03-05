@@ -1,10 +1,10 @@
-from pyFrame.JLabel import JLabel
+from pyFrame.JPanel import JPanel
 from pyFrame.Graphic import Graphics
 from pyFrame.JFrame import *
 from pyFrame.Color import Color
 from PIL import Image
 
-class Panel02(JLabel):
+class Panel02(JPanel):
     def __init__(self) -> None:
         super().__init__()
         self.__img=Image.open("tj.jpg")

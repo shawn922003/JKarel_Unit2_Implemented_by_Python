@@ -4,24 +4,24 @@ import random
 
 
 class Polkadot:
-    def __init__(self,**args):
-        if 'x' in args.keys():
-            self.__myX=args['x']
+    def __init__(self,**kargs):
+        if 'x' in kargs.keys():
+            self.__myX=kargs['x']
         else:
             self.__myX=200
 
-        if 'y' in args.keys():
-            self.__myY=args['y']
+        if 'y' in kargs.keys():
+            self.__myY=kargs['y']
         else:
             self.__myY=200
 
-        if 'd' in args.keys():
-            self.__myDiameter=args['d']
+        if 'd' in kargs.keys():
+            self.__myDiameter=kargs['d']
         else:
             self.__myDiameter=25
 
-        if 'c' in args.keys():
-            self.__myColor=args['c']
+        if 'c' in kargs.keys():
+            self.__myColor=kargs['c']
         else:
             self.__myColor=Color.RED
 

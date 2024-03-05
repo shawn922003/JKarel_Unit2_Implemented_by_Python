@@ -3,13 +3,13 @@ from pyFrame.Color import Color
 import random
 
 class Ball(Polkadot):
-    def __init__(self, **args):
-        if len(args) == 0:
-            args['x']=200
-            args['y']=200
-            args['d']=50
-            args['c']=Color.BLACK
-        super().__init__(**args)
+    def __init__(self, **kargs):
+        if len(kargs) == 0:
+            kargs['x']=200
+            kargs['y']=200
+            kargs['d']=50
+            kargs['c']=Color.BLACK
+        super().__init__(**kargs)
 
         self.__dx=random.random()*20-10
         self.__dy=random.random()*20-10

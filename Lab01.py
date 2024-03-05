@@ -1,9 +1,9 @@
-from pyFrame.JLabel import JLabel
+from pyFrame.JPanel import JPanel
 from pyFrame.Graphic import Graphics
 from pyFrame.JFrame import *
 from pyFrame.Color import Color
 
-class Panel01(JLabel):
+class Panel01(JPanel):
     def __init__(self) -> None:
         super().__init__()
 

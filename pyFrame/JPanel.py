@@ -6,7 +6,7 @@ from pyFrame.event.MouseEvent import _MouseTemplateTransform
 from pyFrame.event.KeyEvent import _KeyTemplateTransform
 import time
 
-class JLabel:
+class JPanel:
     def __init__(self) -> None:
         self.__canvas=None
         self.__pilImg=None

@@ -1,3 +1,4 @@
+from typing import overload
 from pyFrame.Color import Color
 from PIL import Image, ImageTk
 
@@ -5,7 +6,7 @@ class Graphics:
     def __init__(self,canvas) -> None:
         self.__canvas=canvas
         self.color='#FFFFFF'
-        self.width=8
+        self.boldWidth=8
         self.font=['Arial',None,20]
         self._pilImg=None
         self._tkImgs=[]
@@ -18,20 +19,20 @@ class Graphics:
     def _getPilImg(self):
         return self._pilImg
     
-    def setStroke(self,width:int):
-        self.width=width
+    def setStroke(self,boldWidth:int):
+        self.boldWidth=boldWidth
 
     def setColor(self,color:tuple)->None: # type: ignore
         self.color=Color.Color(color)
     
     def drawRect(self,x:int,y:int,width:int,height:int)->None:
-        self.__canvas.create_rectangle(x,y,x+width,y+height, width=self.width, fill='',outline=self.color)
+        self.__canvas.create_rectangle(x,y,x+width,y+height, width=self.boldWidth, fill='',outline=self.color)
 
     def fillRect(self,x:int,y:int,width:int,height:int)->None:
         self.__canvas.create_rectangle(x,y,x+width,y+height, width=0, fill=self.color)
 
     def drawOval(self,x:int,y:int,width:int,height:int)->None:
-        self.__canvas.create_oval(x, y, x+width, y+height, width=self.width, fill='', outline=self.color)
+        self.__canvas.create_oval(x, y, x+width, y+height, width=self.boldWidth, fill='', outline=self.color)
 
     def fillOval(self,x:int,y:int,width:int,height:int)->None:
         self.__canvas.create_oval(x, y, x+width, y+height, width=0, fill=self.color)
@@ -64,11 +65,10 @@ class Graphics:
         tkImg=ImageTk.PhotoImage(self._pilImg)
         self._tkImgs.append(tkImg) # 放進list裡，是避免離開此函數時導致tk_img被釋放掉，導致顯示不出來圖片
         self.__canvas.create_image(x, y, image=self._tkImgs[-1],anchor='nw')
-        
 
 
     def drawLine(self,x1:int,y1:int,x2:int,y2:int):
-        self.__canvas.create_line(x1, y1, x2, y2,width=self.width,fill=self.color)
+        self.__canvas.create_line(x1, y1, x2, y2,width=self.boldWidth,fill=self.color)
 
     def drawPolygon(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -84,7 +84,7 @@ class Graphics:
             arr.append(x)
             arr.append(y)
 
-        self.__canvas.create_polygon(arr , width=self.width, fill='', outline=self.color)
+        self.__canvas.create_polygon(arr , width=self.boldWidth, fill='', outline=self.color)
 
     def drawPolyLine(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -96,6 +96,6 @@ class Graphics:
         assert len(xPoints) != yPoints, "xPoints長度需等於yPoints長度"
             
         for i in range(len(xPoints)-1):
-            self.__canvas.create_line(xPoints[i], yPoints[i], xPoints[i+1], yPoints[i+1],width=self.width,fill=self.color)
+            self.__canvas.create_line(xPoints[i], yPoints[i], xPoints[i+1], yPoints[i+1],width=self.boldWidth,fill=self.color)
 
     

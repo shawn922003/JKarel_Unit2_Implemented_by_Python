@@ -2,7 +2,7 @@ from pyFrame.Color import Color
 from pyFrame.event.MouseAdapter import MouseAdapter
 from pyFrame.event.KeyAdapter import KeyAdapter
 from pyFrame.Graphic import Graphics
-from pyFrame.JLabel import JLabel
+from pyFrame.JPanel import JPanel
 from pyFrame.BufferedImage import BufferedImage
 from pyFrame.Timer import Timer
 from pyFrame.event.MouseEvent import MouseEvent
@@ -12,7 +12,7 @@ from Polkadot import Polkadot
 import math
 import random
 
-class PrizePanel(JLabel):
+class PrizePanel(JPanel):
     __FRAME=400
     __BACKGROUND=(204,204,204)
 
@@ -79,17 +79,17 @@ class PrizePanel(JLabel):
             self.__outClass=outClass
 
         def keyPressed(self, event:KeyEvent):
-            if event.getKeyCode() == KeyEvent.VK_UP and self.outClass.ball.getY() >= self.outClass.ball.getRadius()+10:
-                self.__outClass.ball.setY(self.outClass.ball.getY()-10)
+            if event.getKeyCode() == KeyEvent.VK_UP and self.__outClass.ball.getY() >= self.__outClass.ball.getRadius()+10:
+                self.__outClass.ball.setY(self.__outClass.ball.getY()-10)
 
-            if event.getKeyCode() == KeyEvent.VK_DOWN and self.outClass.ball.getY() <= self.outClass._PrizePanel__FRAME-self.outClass.ball.getRadius()-10:
-                self.__outClass.ball.setY(self.outClass.ball.getY()+10)
+            if event.getKeyCode() == KeyEvent.VK_DOWN and self.__outClass.ball.getY() <= self.__outClass._PrizePanel__FRAME-self.__outClass.ball.getRadius()-10:
+                self.__outClass.ball.setY(self.__outClass.ball.getY()+10)
 
-            if event.getKeyCode() == KeyEvent.VK_LEFT and self.outClass.ball.getX() >= self.outClass.ball.getRadius()-10:
-                self.__outClass.ball.setX(self.outClass.ball.getX()-10)
+            if event.getKeyCode() == KeyEvent.VK_LEFT and self.__outClass.ball.getX() >= self.__outClass.ball.getRadius()-10:
+                self.__outClass.ball.setX(self.__outClass.ball.getX()-10)
 
-            if event.getKeyCode() == KeyEvent.VK_RIGHT and self.outClass.ball.getX() <= self.outClass._PrizePanel__FRAME-self.outClass.ball.getRadius()+10:
-                self.__outClass.ball.setX(self.outClass.ball.getX()+10)
+            if event.getKeyCode() == KeyEvent.VK_RIGHT and self.__outClass.ball.getX() <= self.__outClass._PrizePanel__FRAME-self.__outClass.ball.getRadius()+10:
+                self.__outClass.ball.setX(self.__outClass.ball.getX()+10)
 
             
                 

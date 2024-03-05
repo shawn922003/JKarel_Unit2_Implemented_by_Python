@@ -1,13 +1,13 @@
 from Polkadot import Polkadot
 from pyFrame.Timer import Timer
-from pyFrame.JLabel import JLabel
+from pyFrame.JPanel import JPanel
 from pyFrame.Graphic import Graphics
 from pyFrame.JFrame import *
 from pyFrame.Color import Color
 from pyFrame.BufferedImage import BufferedImage
 
 
-class PolkaDotPanel(JLabel):
+class PolkaDotPanel(JPanel):
     __FRAME=400
     __BACKGROUND=(204,204,204)
 

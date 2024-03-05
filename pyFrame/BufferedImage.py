@@ -1,3 +1,4 @@
+from typing import overload
 from PIL import Image,ImageDraw,ImageFont
 from pyFrame.Color import Color
 
@@ -9,24 +10,25 @@ class BufferedImage:
         self.font = ImageFont.load_default()  # 預設字體
         self.__img=Image.new('RGB',(width,height),'white')
         self.__drawObj=ImageDraw.Draw(self.__img)
+        self.boldWidth=1
 
     def __getattr__(self,name):    
         return getattr(self.__img,name)
     
-    def setStroke(self,width:int):
-        self.width=width
+    def setStroke(self,boldWidth:int):
+        self.boldWidth=int(boldWidth)
 
     def setColor(self,color:tuple)->None: # type: ignore
         self.color=Color.Color(color)
     
     def drawRect(self,x:int,y:int,width:int,height:int)->None:
-        self.__drawObj.rectangle(((x, y), (x + width, y + height)), outline=self.color)
+        self.__drawObj.rectangle(((x, y), (x + width, y + height)), outline=self.color,width=self.boldWidth)
 
     def fillRect(self,x:int,y:int,width:int,height:int)->None:
         self.__drawObj.rectangle(((x,y),(x+width,y+height)),fill=self.color)
 
     def drawOval(self,x:int,y:int,width:int,height:int)->None:
-        self.__drawObj.ellipse((x, y, x + width, y + height), outline=self.color)
+        self.__drawObj.ellipse((x, y, x + width, y + height), outline=self.color,width=self.boldWidth)
 
     def fillOval(self,x:int,y:int,width:int,height:int)->None:
         self.__drawObj.ellipse((x,y,x+width,y+height),fill=self.color)
@@ -43,7 +45,7 @@ class BufferedImage:
         self.__drawObj.text((x, y), string, fill=self.color, font=self.font)
 
     def drawLine(self,x1:int,y1:int,x2:int,y2:int):
-        self.__drawObj.line((x1, y1, x2, y2), fill=self.color)
+        self.__drawObj.line((x1, y1, x2, y2), fill=self.color,width=self.boldWidth)
 
     def drawPolygon(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -54,7 +56,7 @@ class BufferedImage:
         '''
         assert len(xPoints) != yPoints, "xPoints長度需等於yPoints長度"
         points = list(zip(xPoints, yPoints))
-        self.__drawObj.polygon(points, outline=self.color)
+        self.__drawObj.polygon(points, outline=self.color,width=self.boldWidth)
 
     def drawPolyLine(self,xPoints:tuple,yPoints:tuple)->None:
         '''
@@ -65,7 +67,20 @@ class BufferedImage:
         '''
         assert len(xPoints) != yPoints, "xPoints長度需等於yPoints長度"
         points = list(zip(xPoints, yPoints))
-        self.__drawObj.line(points, fill=self.color)
+        self.__drawObj.line(points, fill=self.color,width=self.boldWidth)
+
+
+    @overload
+    def drawImage(self,img:Image,x:int,y:int,width:int,height:int): ...
+
+    @overload
+    def drawImage(self,img:Image,x:int,y:int): ...
+        
+
+    def drawImage(self,img:Image,x:int,y:int,width:int=None,height:int=None):
+        if width is not None and height is not None:
+            img=img.resize((width,height))
+        self.__img.paste(img,(x,y))
         
 
     

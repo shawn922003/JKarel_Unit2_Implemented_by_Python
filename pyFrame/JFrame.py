@@ -1,6 +1,6 @@
 import tkinter as tk
 from pyFrame.Graphic import Graphics
-from pyFrame.JLabel import JLabel
+from pyFrame.JPanel import JPanel
 
 
 class JFrame:
@@ -60,7 +60,7 @@ class JFrame:
         elif operation == self.EXIT_ON_CLOSE:
             self.__window.protocol("WM_DELETE_WINDOW", lambda: self.__on_close(3))
 
-    def setContentPane(self,contentPane:JLabel)->None:
+    def setContentPane(self,contentPane:JPanel)->None:
         self.__contentPane=contentPane
         self.__contentPane.paintComponent(self.__graphics)
         self.__contentPane._setCanvas(self.__canvas)
