@@ -99,7 +99,7 @@ class Turtle:
             
     
     def pause(self):
-        time.sleep(Turtle.__crawlSpeed*10)
+        time.sleep(Turtle.__crawlSpeed*2)
 
     def setThickness(self,x:int):
         self.__thickness=float(x)
