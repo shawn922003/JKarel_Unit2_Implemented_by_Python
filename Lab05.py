@@ -20,7 +20,6 @@ class Panel05(JPanel):
         while True:
             for i in range(4):
                 bugs[i%4].walkTowards(bugs[(i+1)%4], 0.1)
-                # In Python, you would need to use a library like matplotlib to draw lines.
                 self.__img.drawLine(bugs[i%4].getX(),bugs[i%4].getY(),bugs[(i+1)%4].getX(),bugs[(i+1)%4].getY())
 
             if (bugs[0].sameSpot(bugs[1]) or bugs[1].sameSpot(bugs[2]) or 

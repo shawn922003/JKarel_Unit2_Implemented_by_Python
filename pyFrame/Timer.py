@@ -18,5 +18,6 @@ class Timer:
     def __run(self):
         while True:
             if self.__switch:
-                self.__function()
                 time.sleep(self.__period)
+                self.__function()
+                
