@@ -14,7 +14,10 @@ class Panel03(JPanel):
         self.__img.fillRect(0, 0, self.__N, self.__N)
         self.__img.setColor(Color.YELLOW)
         for k in range(51):
-            self.__img.drawLine(self.__N * k / 50, 0, self.__N, self.__N * k / 50)
+            self.__img.drawLine(0,self.__N//2 - self.__N//2 / 50 * k, self.__N//2 /50 * k,0)
+            self.__img.drawLine(self.__N//2 + self.__N//2 /50 * k,0 ,self.__N, self.__N//2/50 * k)
+            self.__img.drawLine(self.__N,self.__N//2 + self.__N//2 /50 * k,self.__N - self.__N//2 /50 * k,self.__N)
+            self.__img.drawLine(self.__N//2 - self.__N//2 /50 * k,self.__N,0,self.__N - self.__N//2 /50 * k )
 
         x=self.__N/2
         y=self.__N/2
